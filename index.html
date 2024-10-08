@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java to CSS Compiler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* To maintain formatting */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Java to CSS Compiler</h1>
+<textarea id="javaInput" placeholder="Write your Java code here..."></textarea>
+<button onclick="convertToCSS()">Compile to CSS</button>
+
+<h2>Output CSS:</h2>
+<div id="output"></div>
+
+<script>
+    function convertToCSS() {
+        const javaCode = document.getElementById('javaInput').value;
+        
+        // This is a mock conversion function; logic to be added soon
+        const cssOutput = javaCode
+            .split('\n')
+            .map(line => {
+                // Example: Convert Java variable declarations to CSS variables
+                if (line.trim().startsWith('int ')) {
+                    const varName = line.split(' ')[1].replace(';', '');
+                    return `--${varName}: 0;`; // Defaulting to 0
+                } else if (line.trim().startsWith('String ')) {
+                    const varName = line.split(' ')[1].replace(';', '');
+                    return `--${varName}: '';`; // Defaulting to empty string
+                }
+                return ''; // Ignore other lines
+            })
+            .filter(Boolean)
+            .join('\n');
+        
+        document.getElementById('output').textContent = cssOutput;
+    }
+</script>
+
+</body>
+</html>
